@@ -33,10 +33,10 @@ It takes client's scripts to be migrated as input and gives output in form of fi
 4. `Log Folder` : Will have execution logs
     
 <b>Step by Step instruction to run the code </b>
-1. Bundle your scripts to be migrated in form of a zip file and place it in input folder of the framework
-2. Use appconfig.json file inside input folder to define keywords to be considered for calculating complexity of the file. 
+1. Bundle your scripts to be migrated in form of a zip file and place it in `input` folder of the framework
+2. Use `appconfig.json` file inside input folder to define keywords to be considered for calculating complexity of the file. 
 </br>Note: There is already set of keywords defined. You can add or delete according to your use case.
-3. Use config sheet of estimator_template.xlsx inside input folder to define effort hours for each complexity
+3. Use config sheet of `estimator_template.xlsx` inside input folder to define effort hours for each complexity
 </br>Note: There is already effort hours defined. Please edit according to your use case.
 4. Install Requirements
 Run 
