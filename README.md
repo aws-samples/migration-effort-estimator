@@ -27,7 +27,7 @@ It takes client's scripts to be migrated as input and gives output in form of fi
 
      Folder info
        - `Input Folder` : It has appconfig.json, estimator_template.xlsx. You will be placing compressed migration scripts folder here.
-       - `Outputs folder` : After you run the script, it will have all your migration files arranged according to folders
+       - `Outputs folder` : AOnce the script is run, it will have all migration files arranged according to Script type
        - `Excel folder` :  It will have have two file generated one each for file level and summary level info
        - `Log Folder` : Will have execution logs
     
