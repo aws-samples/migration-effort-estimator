@@ -1,0 +1,33 @@
+{
+	"keywords" : ["update", "delete", "insert", "Flatten" , "ROW_NUMBER" , "RANK" , "JOIN",  "UNION" , "PARTITION BY" , "PARTITIONED"],
+	"Line_of_code": {
+		"complex": 1000,
+		"medium-complex":750,
+		"medium": 500,
+		"simple-medium" : 400
+	},
+	"update": {
+		"complex": 24,
+		"medium-complex":10,
+		"medium": 5,
+		"simple-medium" : 3
+	},
+	"insert": {
+		"complex": 26,
+		"medium-complex":20,
+		"medium": 15,
+		"simple-medium" : 10
+	},
+	"delete": {
+		"complex": 25,
+		"medium-complex":20,
+		"medium": 15,
+		"simple-medium" : 10
+	},
+	"join": {
+		"complex": 35,
+		"medium-complex":10,
+		"medium": 5,
+		"simple-medium" : 3
+	}
+}
