@@ -138,27 +138,32 @@ def upload_to_s3(source_bucket, SummaryPath, fileinfoPath):
             s3_resource.Object(source_bucket, target_key).put(Body=csv_buffer.getvalue())
         """
         message += "##########################################################\n"
-        ##send_notification(message,appname)
+        return message
+    
     except Exception as exception:
         logger.error("Exception occured while uploading to S3")
         logger.error(exception)
         exit()
 
-def send_notification(body,appname):
+def send_notification(body,appname, topic):
     # Create an SNS client
-    sns = boto3.client('sns')
-    # Publish a simple message to the specified SNS topic
-    response = sns.publish(
-        TargetArn='',  
-        Message=body, 
-        MessageAttributes= {
+    try:
+        sns = boto3.client('sns')
+        # Publish a simple message to the specified SNS topic
+        response = sns.publish(
+            TargetArn=topic,  
+            Message=body, 
+            MessageAttributes= {
                 'appname': {
                     'DataType': 'String',
                     'StringValue': appname.lower()
                     }
                     },
-        Subject="Migration Effort Estimator Calculator Process is Completed at:{} ".format(datetime.now())
-    )
+            Subject="Migration Effort Estimator Calculator Process is Completed at:{} ".format(datetime.now())
+        )
+    except Exception as exception:
+        logger.error("Exception occured while Sending notification. Check your Topic ARN and AWS Configure for default region ?")
+        logger.error(exception)
 
 def unzip_file(input_zip, output_dir):
     """Unzipping file to output_dir; returns file path to output directory"""
@@ -321,6 +326,7 @@ if (__name__ == '__main__'):
     parser.add_argument('--output', dest='output', type=str, help='Output directory path', required=True)
     parser.add_argument('--config', dest='config', type=str, help='Config file path', required=True)
     parser.add_argument('--bucket', dest='bucket', type=str, help='S3 bucket name', required=False)
+    parser.add_argument('--topic', dest='topic', type=str, help='Topic ARN', required=False)
 
     args = parser.parse_args()
     if (not args.input or not args.output):
@@ -337,10 +343,10 @@ if (__name__ == '__main__'):
     #Uncomment below to upload file to S3
     if args.bucket:
         print("Done\nUploading file to S3")
-        upload_to_s3(args.bucket.strip(), SummaryPath, filePath)
-    if args.topic:
-        print("Done\nUploading file to S3")
-        upload_to_s3(args.bucket.strip(), SummaryPath, filePath)
+        message=upload_to_s3(args.bucket.strip(), SummaryPath, filePath)
+        if args.topic:
+            print("Done\nSending Notification")
+            send_notification(message, 'hadoop', args.topic.strip())
     print("Done!\nCheck out more info in log file: %s \n" %file_name)
 
             
