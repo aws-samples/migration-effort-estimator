@@ -45,9 +45,9 @@ Run
       ```
 5. Run the estimator.py with arguments
       ```
-      python3 estimator.py --input 'input/<your_zip_file_name>' --output 'outputs/' --config 'input/appconfig.json' [--bucket '<S3_bucket>'] 
+      python3 estimator.py --input 'input/<your_zip_file_name>' --output 'outputs/' --config 'input/appconfig.json' [--bucket '<S3_bucket>'] [--topic '<topic ARN>']
       ```
-      Note: Arguments `input`, `output` and `config` are required; bucket is an optional argument, if mentioned will upload your Excels generated to mentioned S3 bucket.
+      Note: Arguments `input`, `output` and `config` are required; bucket and topic are an optional argument, if mentioned will upload your Excels generated to mentioned S3 bucket and send notification to Topic mentioned. 
 
 ## Optional QuickSight Setup
 
