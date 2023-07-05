@@ -1,7 +1,7 @@
 {
     "AwsAccountId": "$AwsAccountId",
 
-    "AnalysisId": "test4",
+    "AnalysisId": "Migration Effort Estimator",
     "Name": "Migration Effort Estimator",
     "Permissions": [
         {
