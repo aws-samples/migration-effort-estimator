@@ -138,7 +138,7 @@ def upload_to_s3(source_bucket, SummaryPath, fileinfoPath):
             s3_resource.Object(source_bucket, target_key).put(Body=csv_buffer.getvalue())
         """
         message += "##########################################################\n"
-        #send_notification(message,appname)
+        ##send_notification(message,appname)
     except Exception as exception:
         logger.error("Exception occured while uploading to S3")
         logger.error(exception)
@@ -149,7 +149,7 @@ def send_notification(body,appname):
     sns = boto3.client('sns')
     # Publish a simple message to the specified SNS topic
     response = sns.publish(
-        TargetArn='arn:aws:sns:us-east-1:408926663640:hadoop-ramy',  
+        TargetArn='',  
         Message=body, 
         MessageAttributes= {
                 'appname': {
@@ -338,5 +338,9 @@ if (__name__ == '__main__'):
     if args.bucket:
         print("Done\nUploading file to S3")
         upload_to_s3(args.bucket.strip(), SummaryPath, filePath)
+    if args.topic:
+        print("Done\nUploading file to S3")
+        upload_to_s3(args.bucket.strip(), SummaryPath, filePath)
     print("Done!\nCheck out more info in log file: %s \n" %file_name)
+
             
