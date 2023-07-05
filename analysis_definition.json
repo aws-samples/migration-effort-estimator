@@ -1,0 +1,2589 @@
+{
+    "AwsAccountId": "$AwsAccountId",
+
+    "AnalysisId": "test4",
+    "Name": "Migration Effort Estimator",
+    "Permissions": [
+        {
+            "Principal": "arn:aws:quicksight:$region:$AwsAccountId:user/$namespace/$username",
+            "Actions": [
+                "quicksight:RestoreAnalysis",
+                "quicksight:UpdateAnalysisPermissions",
+                "quicksight:DeleteAnalysis",
+                "quicksight:DescribeAnalysisPermissions",
+                "quicksight:QueryAnalysis",
+                "quicksight:DescribeAnalysis",
+                "quicksight:UpdateAnalysis"
+            ]
+        }
+    ],
+    "Definition": {
+        "DataSetIdentifierDeclarations": [
+            {
+                "Identifier": "summary_file",
+                "DataSetArn": "arn:aws:quicksight:$region:$AwsAccountId:dataset/$SummaryDatasetID"
+            },
+            {
+                "Identifier": "file_level_info",
+                "DataSetArn": "arn:aws:quicksight:$region:$AwsAccountId:dataset/$FileLevelInfoDatasetID"
+            }
+        ],
+        "Sheets": [
+            {
+                "SheetId": "2cd415dc-35e8-424e-a170-99dcee879c48",
+                "Name": "Estimator Summary",
+                "ParameterControls": [
+                    {
+                        "Dropdown": {
+                            "ParameterControlId": "f3a94ed0-925d-400a-aecb-be1c511c6837",
+                            "Title": "Complexity",
+                            "SourceParameterName": "Complexity",
+                            "DisplayOptions": {
+                                "SelectAllOptions": {
+                                    "Visibility": "VISIBLE"
+                                },
+                                "TitleOptions": {
+                                    "Visibility": "VISIBLE",
+                                    "FontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "MEDIUM"
+                                        }
+                                    }
+                                }
+                            },
+                            "Type": "MULTI_SELECT",
+                            "SelectableValues": {
+                                "LinkToDataSetColumn": {
+                                    "DataSetIdentifier": "file_level_info",
+                                    "ColumnName": "complexity"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Dropdown": {
+                            "ParameterControlId": "79704b55-5744-48ce-a43b-c7ab1a0c569d",
+                            "Title": "Feed Type",
+                            "SourceParameterName": "FeedType",
+                            "DisplayOptions": {
+                                "SelectAllOptions": {
+                                    "Visibility": "VISIBLE"
+                                },
+                                "TitleOptions": {
+                                    "Visibility": "VISIBLE",
+                                    "FontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "MEDIUM"
+                                        }
+                                    }
+                                }
+                            },
+                            "Type": "MULTI_SELECT",
+                            "SelectableValues": {
+                                "LinkToDataSetColumn": {
+                                    "DataSetIdentifier": "summary_file",
+                                    "ColumnName": "Feed Type"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Visuals": [
+                    {
+                        "KPIVisual": {
+                            "VisualId": "fd83748f-8e89-4bff-b198-48b861adcf87",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">\n    <b>Total Effort Hours</b>\n  </block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "Values": [
+                                        {
+                                            "NumericalMeasureField": {
+                                                "FieldId": "c3c9d22f-824f-4f18-9e10-0a7a1a0b0950.0.1685003293833",
+                                                "Column": {
+                                                    "DataSetIdentifier": "summary_file",
+                                                    "ColumnName": "Effort  Hours"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "TargetValues": [],
+                                    "TrendGroups": []
+                                },
+                                "SortConfiguration": {}
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "99ac3bd4-f230-486a-bebb-6aaa0c73960c",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">\n    <b>Effort Hours and Feed Count Distribution</b>\n  </block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "1e4a1f55-3805-4a73-be75-53caac65fb68.1.1685002862797",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "summary_file",
+                                                        "ColumnName": "FEED TYPE"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "c3c9d22f-824f-4f18-9e10-0a7a1a0b0950.1.1685002844113",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "summary_file",
+                                                        "ColumnName": "Effort  Hours"
+                                                    },
+                                                    "FormatConfiguration": {
+                                                        "FormatConfiguration": {
+                                                            "NumberDisplayFormatConfiguration": {
+                                                                "NumberScale": "NONE"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "450656a6-240e-4440-8841-e28166caa5e5.Feed Count.2.1686151583298",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "summary_file",
+                                                        "ColumnName": "Feed Count"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    },
+                                                    "FormatConfiguration": {
+                                                        "FormatConfiguration": {
+                                                            "NumberDisplayFormatConfiguration": {
+                                                                "NumberScale": "NONE"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Colors": []
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "FieldSort": {
+                                                "FieldId": "c3c9d22f-824f-4f18-9e10-0a7a1a0b0950.1.1685002844113",
+                                                "Direction": "DESC"
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "INCLUDE"
+                                    }
+                                },
+                                "Orientation": "HORIZONTAL",
+                                "BarsArrangement": "CLUSTERED",
+                                "VisualPalette": {
+                                    "ChartColor": "#2A5D78",
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "450656a6-240e-4440-8841-e28166caa5e5.Feed Count.2.1686151583298",
+                                                "FieldValue": "Feed Count"
+                                            },
+                                            "Color": "#33AEB1"
+                                        }
+                                    ]
+                                },
+                                "ValueAxis": {
+                                    "DataOptions": {
+                                        "NumericAxisOptions": {
+                                            "Scale": {
+                                                "Linear": {
+                                                    "StepSize": 150.0
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Legend": {
+                                    "Visibility": "VISIBLE",
+                                    "Title": {
+                                        "Visibility": "HIDDEN"
+                                    },
+                                    "Position": "BOTTOM"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "VISIBLE",
+                                    "LabelFontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "LARGE"
+                                        }
+                                    },
+                                    "Overlap": "ENABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "DETAILED",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "1e4a1f55-3805-4a73-be75-53caac65fb68.1.1685002862797",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "c3c9d22f-824f-4f18-9e10-0a7a1a0b0950.1.1685002844113",
+                                                    "Label": "Effort Hours",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "450656a6-240e-4440-8841-e28166caa5e5.Feed Count.2.1686151583298",
+                                                    "Label": "Feed Count",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "KPIVisual": {
+                            "VisualId": "a7d8f761-e6e1-4e70-bc10-8921855f4e0c",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">\n    <b>Total Number of Scripts</b>\n  </block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "Values": [
+                                        {
+                                            "NumericalMeasureField": {
+                                                "FieldId": "450656a6-240e-4440-8841-e28166caa5e5.Feed Count.0.1685003151107",
+                                                "Column": {
+                                                    "DataSetIdentifier": "summary_file",
+                                                    "ColumnName": "Feed Count"
+                                                },
+                                                "AggregationFunction": {
+                                                    "SimpleNumericalAggregation": "SUM"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "TargetValues": [],
+                                    "TrendGroups": []
+                                },
+                                "SortConfiguration": {}
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "InsightVisual": {
+                            "VisualId": "cf0751e8-b1ff-4479-bfcd-b3021a7b3b43",
+                            "Title": {
+                                "Visibility": "HIDDEN",
+                                "FormatText": {
+                                    "PlainText": "Insight"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "InsightConfiguration": {
+                                "Computations": [
+                                    {
+                                        "TopBottomRanked": {
+                                            "ComputationId": "eb6f8d5a-a28f-41b4-be0b-b3c54e0b464f",
+                                            "Name": "Bottom",
+                                            "Category": {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.0.1685003832614",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            },
+                                            "ResultSize": 3,
+                                            "Type": "BOTTOM"
+                                        }
+                                    }
+                                ],
+                                "CustomNarrative": {
+                                    "Narrative": "<narrative>\n  <inline font-size=\"54.88px\">\n    <img src=\"https://m.media-amazon.com/images/G/01/aws-proserve-bi/light_theme_logo.png\" width=\"256\"/>\n  </inline>\n  <inline font-size=\"54.88px\">       MIGRATION EFFORT ESTIMATOR</inline>\n</narrative>"
+                                }
+                            },
+                            "Actions": [],
+                            "DataSetIdentifier": "file_level_info"
+                        }
+                    },
+                    {
+                        "PieChartVisual": {
+                            "VisualId": "5206f833-24b6-46a0-ac85-e42b73f237a3",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">\n    <b>Feed Count By Complexity</b>\n  </block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "PieChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.0.1687351421068",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "COMPLEXITY"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": []
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "ColumnSort": {
+                                                "SortBy": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "pie_s_number"
+                                                },
+                                                "Direction": "ASC",
+                                                "AggregationFunction": {
+                                                    "NumericalAggregationFunction": {
+                                                        "SimpleNumericalAggregation": "AVERAGE"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "INCLUDE"
+                                    }
+                                },
+                                "DonutOptions": {
+                                    "ArcOptions": {
+                                        "ArcThickness": "MEDIUM"
+                                    }
+                                },
+                                "Legend": {
+                                    "Visibility": "HIDDEN",
+                                    "Title": {
+                                        "Visibility": "HIDDEN"
+                                    },
+                                    "Position": "BOTTOM"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "VISIBLE",
+                                    "CategoryLabelVisibility": "VISIBLE",
+                                    "MeasureLabelVisibility": "VISIBLE",
+                                    "Position": "OUTSIDE",
+                                    "LabelContent": "VALUE_AND_PERCENT",
+                                    "LabelFontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "MEDIUM"
+                                        }
+                                    },
+                                    "Overlap": "ENABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "DETAILED",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.0.1687351421068",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "VisualPalette": {
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.0.1687351421068",
+                                                "FieldValue": "MEDIUM-COMPLEX"
+                                            },
+                                            "Color": "#A8577B"
+                                        }
+                                    ]
+                                }
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    }
+                ],
+                "Layouts": [
+                    {
+                        "Configuration": {
+                            "FreeFormLayout": {
+                                "Elements": [
+                                    {
+                                        "ElementId": "cf0751e8-b1ff-4479-bfcd-b3021a7b3b43",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "16px",
+                                        "Width": "1328px",
+                                        "Height": "96px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "a7d8f761-e6e1-4e70-bc10-8921855f4e0c",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "128px",
+                                        "Width": "240px",
+                                        "Height": "176px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "fd83748f-8e89-4bff-b198-48b861adcf87",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "272px",
+                                        "YAxisLocation": "128px",
+                                        "Width": "240px",
+                                        "Height": "176px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "99ac3bd4-f230-486a-bebb-6aaa0c73960c",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "528px",
+                                        "YAxisLocation": "128px",
+                                        "Width": "816px",
+                                        "Height": "640px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "5206f833-24b6-46a0-ac85-e42b73f237a3",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "320px",
+                                        "Width": "496px",
+                                        "Height": "448px",
+                                        "Visibility": "VISIBLE"
+                                    }
+                                ],
+                                "CanvasSizeOptions": {
+                                    "ScreenCanvasSizeOptions": {
+                                        "OptimizedViewPortWidth": "1366px"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SheetControlLayouts": [
+                    {
+                        "Configuration": {
+                            "GridLayout": {
+                                "Elements": [
+                                    {
+                                        "ElementId": "f3a94ed0-925d-400a-aecb-be1c511c6837",
+                                        "ElementType": "PARAMETER_CONTROL",
+                                        "ColumnSpan": 2,
+                                        "RowSpan": 1
+                                    },
+                                    {
+                                        "ElementId": "79704b55-5744-48ce-a43b-c7ab1a0c569d",
+                                        "ElementType": "PARAMETER_CONTROL",
+                                        "ColumnSpan": 2,
+                                        "RowSpan": 1
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "ContentType": "INTERACTIVE"
+            },
+            {
+                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                "Name": "File Level Information",
+                "ParameterControls": [
+                    {
+                        "Dropdown": {
+                            "ParameterControlId": "701fbd13-b37f-415a-9ef5-ef222e0f132c",
+                            "Title": "File Name",
+                            "SourceParameterName": "FileName",
+                            "DisplayOptions": {
+                                "SelectAllOptions": {
+                                    "Visibility": "VISIBLE"
+                                },
+                                "TitleOptions": {
+                                    "Visibility": "VISIBLE",
+                                    "FontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "MEDIUM"
+                                        }
+                                    }
+                                }
+                            },
+                            "Type": "MULTI_SELECT",
+                            "SelectableValues": {
+                                "LinkToDataSetColumn": {
+                                    "DataSetIdentifier": "file_level_info",
+                                    "ColumnName": "File Name"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "Slider": {
+                            "ParameterControlId": "e9004b5f-9c76-4257-94f0-7edc9a46be21",
+                            "Title": "Change result size:",
+                            "SourceParameterName": "TopValue",
+                            "DisplayOptions": {
+                                "TitleOptions": {
+                                    "Visibility": "VISIBLE",
+                                    "FontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "MEDIUM"
+                                        }
+                                    }
+                                }
+                            },
+                            "MaximumValue": 100.0,
+                            "MinimumValue": 0.0,
+                            "StepSize": 1.0
+                        }
+                    }
+                ],
+                "Visuals": [
+                    {
+                        "InsightVisual": {
+                            "VisualId": "de82e894-b461-4661-95fe-a5089d494629",
+                            "Title": {
+                                "Visibility": "HIDDEN",
+                                "FormatText": {
+                                    "PlainText": "Insight"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "InsightConfiguration": {
+                                "Computations": [
+                                    {
+                                        "TopBottomRanked": {
+                                            "ComputationId": "a075d7bc-6962-4222-abc4-4eb57a6f665d",
+                                            "Name": "Bottom",
+                                            "Category": {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.0.1685003832614",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            },
+                                            "ResultSize": 3,
+                                            "Type": "BOTTOM"
+                                        }
+                                    }
+                                ],
+                                "CustomNarrative": {
+                                    "Narrative": "<narrative>\n  <block align=\"center\">\n    <inline font-size=\"54.88px\">FILE LEVEL INFORMATION</inline>\n  </block>\n  <br/>\n  <block align=\"center\">The below visuals can be used to analyze file level information to study the parameters that affect the complexity of files.</block>\n</narrative>"
+                                }
+                            },
+                            "Actions": [],
+                            "DataSetIdentifier": "file_level_info"
+                        }
+                    },
+                    {
+                        "InsightVisual": {
+                            "VisualId": "f0302e03-2805-4ace-84ae-cd57e53ef5bc",
+                            "Title": {
+                                "Visibility": "HIDDEN",
+                                "FormatText": {
+                                    "PlainText": "Insight"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "InsightConfiguration": {
+                                "Computations": [
+                                    {
+                                        "TopBottomRanked": {
+                                            "ComputationId": "664ce97a-421c-4a8a-a071-960046630906",
+                                            "Name": "Bottom",
+                                            "Category": {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.0.1685003832614",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            },
+                                            "ResultSize": 3,
+                                            "Type": "BOTTOM"
+                                        }
+                                    }
+                                ],
+                                "CustomNarrative": {
+                                    "Narrative": "<narrative>\n  <inline font-size=\"54.88px\">\n    <img src=\"https://m.media-amazon.com/images/G/01/aws-proserve-bi/light_theme_logo.png\" width=\"256\"/>\n  </inline>\n  <inline font-size=\"54.88px\">       MIGRATION EFFORT ESTIMATOR</inline>\n</narrative>"
+                                }
+                            },
+                            "Actions": [],
+                            "DataSetIdentifier": "file_level_info"
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "86b58201-25db-4faf-a63c-4f843a288a72",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">SQL Files</block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "HIDDEN"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "line_of_code"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Colors": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "COMPLEXITY"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "FieldSort": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Direction": "ASC"
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "EXCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "EXCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "EXCLUDE"
+                                    }
+                                },
+                                "Orientation": "VERTICAL",
+                                "BarsArrangement": "CLUSTERED",
+                                "VisualPalette": {
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "MEDIUM-HARD"
+                                            },
+                                            "Color": "#F6AA54"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "EASY"
+                                            },
+                                            "Color": "#33AEB1"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "HARD"
+                                            },
+                                            "Color": "#2A5D78"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "MEDIUM"
+                                            },
+                                            "Color": "#219FD7"
+                                        }
+                                    ]
+                                },
+                                "ValueLabelOptions": {
+                                    "AxisLabelOptions": [
+                                        {
+                                            "CustomLabel": "Code Lines",
+                                            "ApplyTo": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "Legend": {
+                                    "Position": "BOTTOM"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "HIDDEN",
+                                    "Overlap": "DISABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "BASIC",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "ReferenceLines": [
+                                    {
+                                        "Status": "ENABLED",
+                                        "DataConfiguration": {
+                                            "DynamicConfiguration": {
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                },
+                                                "MeasureAggregationFunction": {
+                                                    "NumericalAggregationFunction": {
+                                                        "SimpleNumericalAggregation": "AVERAGE"
+                                                    }
+                                                },
+                                                "Calculation": {
+                                                    "SimpleNumericalAggregation": "AVERAGE"
+                                                }
+                                            }
+                                        },
+                                        "StyleConfiguration": {
+                                            "Pattern": "DASHED",
+                                            "Color": "#000000"
+                                        },
+                                        "LabelConfiguration": {
+                                            "ValueLabelConfiguration": {
+                                                "RelativePosition": "BEFORE_CUSTOM_LABEL"
+                                            },
+                                            "FontConfiguration": {
+                                                "FontSize": {
+                                                    "Relative": "MEDIUM"
+                                                }
+                                            },
+                                            "HorizontalPosition": "RIGHT",
+                                            "VerticalPosition": "ABOVE"
+                                        }
+                                    }
+                                ]
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "2d068bc5-223e-4b6b-91a8-d46c2a8b1f1d",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">PIG Files</block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "line_of_code"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Colors": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "COMPLEXITY"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "FieldSort": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Direction": "ASC"
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "EXCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "EXCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "EXCLUDE"
+                                    }
+                                },
+                                "Orientation": "VERTICAL",
+                                "BarsArrangement": "CLUSTERED",
+                                "VisualPalette": {
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "MEDIUM-HARD"
+                                            },
+                                            "Color": "#219FD7"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "EASY-MEDIUM"
+                                            },
+                                            "Color": "#6197E2"
+                                        }
+                                    ]
+                                },
+                                "ValueLabelOptions": {
+                                    "AxisLabelOptions": [
+                                        {
+                                            "CustomLabel": "Code Lines",
+                                            "ApplyTo": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "Legend": {
+                                    "Position": "BOTTOM",
+                                    "Height": "38px"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "HIDDEN",
+                                    "Overlap": "DISABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "BASIC",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "ReferenceLines": [
+                                    {
+                                        "Status": "ENABLED",
+                                        "DataConfiguration": {
+                                            "DynamicConfiguration": {
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                },
+                                                "MeasureAggregationFunction": {
+                                                    "NumericalAggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                },
+                                                "Calculation": {
+                                                    "SimpleNumericalAggregation": "AVERAGE"
+                                                }
+                                            }
+                                        },
+                                        "StyleConfiguration": {
+                                            "Pattern": "DASHED"
+                                        },
+                                        "LabelConfiguration": {
+                                            "ValueLabelConfiguration": {
+                                                "RelativePosition": "BEFORE_CUSTOM_LABEL"
+                                            },
+                                            "FontConfiguration": {
+                                                "FontSize": {
+                                                    "Relative": "MEDIUM"
+                                                }
+                                            },
+                                            "HorizontalPosition": "RIGHT",
+                                            "VerticalPosition": "ABOVE"
+                                        }
+                                    }
+                                ]
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "40d466b5-7342-4265-8bb5-a9158f158e78",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">PY Files</block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "HIDDEN"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "line_of_code"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Colors": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "COMPLEXITY"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "FieldSort": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Direction": "ASC"
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "EXCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "EXCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "EXCLUDE"
+                                    }
+                                },
+                                "Orientation": "VERTICAL",
+                                "BarsArrangement": "CLUSTERED",
+                                "VisualPalette": {
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "HARD"
+                                            },
+                                            "Color": "#2A5D78"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "MEDIUM-HARD"
+                                            },
+                                            "Color": "#F6AA54"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                "FieldValue": "MEDIUM"
+                                            },
+                                            "Color": "#219FD7"
+                                        }
+                                    ]
+                                },
+                                "ValueLabelOptions": {
+                                    "AxisLabelOptions": [
+                                        {
+                                            "CustomLabel": "Code Lines",
+                                            "ApplyTo": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "Legend": {
+                                    "Position": "BOTTOM",
+                                    "Height": "38px"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "HIDDEN",
+                                    "Overlap": "DISABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "BASIC",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153378067",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "ReferenceLines": [
+                                    {
+                                        "Status": "ENABLED",
+                                        "DataConfiguration": {
+                                            "DynamicConfiguration": {
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                },
+                                                "MeasureAggregationFunction": {
+                                                    "NumericalAggregationFunction": {
+                                                        "SimpleNumericalAggregation": "AVERAGE"
+                                                    }
+                                                },
+                                                "Calculation": {
+                                                    "SimpleNumericalAggregation": "AVERAGE"
+                                                }
+                                            }
+                                        },
+                                        "StyleConfiguration": {
+                                            "Pattern": "DASHED",
+                                            "Color": "#000000"
+                                        },
+                                        "LabelConfiguration": {
+                                            "ValueLabelConfiguration": {
+                                                "RelativePosition": "BEFORE_CUSTOM_LABEL"
+                                            },
+                                            "FontConfiguration": {
+                                                "FontSize": {
+                                                    "Relative": "MEDIUM"
+                                                }
+                                            },
+                                            "HorizontalPosition": "RIGHT",
+                                            "VerticalPosition": "ABOVE"
+                                        }
+                                    }
+                                ]
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "b5382d24-12a4-4b43-9c32-c3466a757ab6",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">\n    <b>Feed Type Complexity</b>\n  </block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.1.1686152641770",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "COMPLEXITY"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [],
+                                        "Colors": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.Feed Type.1.1686152645011",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "Feed Type"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "ColumnSort": {
+                                                "SortBy": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "serial number"
+                                                },
+                                                "Direction": "ASC",
+                                                "AggregationFunction": {
+                                                    "NumericalAggregationFunction": {
+                                                        "SimpleNumericalAggregation": "MIN"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "INCLUDE"
+                                    }
+                                },
+                                "Orientation": "VERTICAL",
+                                "BarsArrangement": "CLUSTERED",
+                                "Legend": {
+                                    "Width": "116px"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "VISIBLE",
+                                    "LabelFontConfiguration": {
+                                        "FontSize": {
+                                            "Relative": "LARGE"
+                                        }
+                                    },
+                                    "LabelColor": "#444444",
+                                    "Overlap": "ENABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "BASIC",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.1.1686152641770",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.Feed Type.1.1686152645011",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "5059aa1f-7555-4a61-9bac-530ec2cd29d8",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>Occurrence of Keywords in Feeds</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.Feed Type.10.1686152863824",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "Feed Type"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.delete.1.1686152755164",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "delete"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.flatten.2.1686152805488",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "flatten"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.insert.3.1686152807535",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "insert"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.join.4.1686152809478",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "join"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.partition by.4.1686152815846",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "partition by"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.partitioned.6.1686152842279",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "partitioned"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.rank.7.1686152843939",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "rank"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.union.9.1686152850108",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "union"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.row_number.9.1686152854689",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "row_number"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Colors": []
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "FieldSort": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.delete.1.1686152755164",
+                                                "Direction": "DESC"
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "INCLUDE"
+                                    }
+                                },
+                                "Orientation": "VERTICAL",
+                                "BarsArrangement": "STACKED_PERCENT",
+                                "VisualPalette": {
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.row_number.9.1686152854689",
+                                                "FieldValue": "row_number"
+                                            },
+                                            "Color": "#C3AC65"
+                                        }
+                                    ]
+                                },
+                                "Legend": {
+                                    "Title": {
+                                        "CustomLabel": "Keywords"
+                                    }
+                                },
+                                "DataLabels": {
+                                    "Visibility": "VISIBLE",
+                                    "Overlap": "DISABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "DETAILED",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.delete.1.1686152755164",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.flatten.2.1686152805488",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.insert.3.1686152807535",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.join.4.1686152809478",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.partition by.4.1686152815846",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.partitioned.6.1686152842279",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.rank.7.1686152843939",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.union.9.1686152850108",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.row_number.9.1686152854689",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.Feed Type.10.1686152863824",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "BarChartVisual": {
+                            "VisualId": "30775149-ad5c-4cab-8354-a95eaee71c78",
+                            "Title": {
+                                "Visibility": "VISIBLE",
+                                "FormatText": {
+                                    "RichText": "<visual-title>\n  <block align=\"center\">SH Files</block>\n</visual-title>"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "ChartConfiguration": {
+                                "FieldWells": {
+                                    "BarChartAggregatedFieldWells": {
+                                        "Category": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "File Name"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Values": [
+                                            {
+                                                "NumericalMeasureField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "line_of_code"
+                                                    },
+                                                    "AggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "Colors": [
+                                            {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153283863",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "COMPLEXITY"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "SortConfiguration": {
+                                    "CategorySort": [
+                                        {
+                                            "FieldSort": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Direction": "ASC"
+                                            }
+                                        }
+                                    ],
+                                    "CategoryItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "ColorItemsLimit": {
+                                        "OtherCategories": "INCLUDE"
+                                    },
+                                    "SmallMultiplesLimitConfiguration": {
+                                        "OtherCategories": "INCLUDE"
+                                    }
+                                },
+                                "Orientation": "VERTICAL",
+                                "BarsArrangement": "CLUSTERED",
+                                "VisualPalette": {
+                                    "ColorMap": [
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153283863",
+                                                "FieldValue": "HARD"
+                                            },
+                                            "Color": "#2A5D78"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153283863",
+                                                "FieldValue": "MEDIUM"
+                                            },
+                                            "Color": "#219FD7"
+                                        },
+                                        {
+                                            "Element": {
+                                                "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153283863",
+                                                "FieldValue": "MEDIUM-HARD"
+                                            },
+                                            "Color": "#F6AA54"
+                                        }
+                                    ]
+                                },
+                                "ValueLabelOptions": {
+                                    "AxisLabelOptions": [
+                                        {
+                                            "CustomLabel": "Code Lines",
+                                            "ApplyTo": {
+                                                "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "Legend": {
+                                    "Position": "BOTTOM",
+                                    "Height": "38px"
+                                },
+                                "DataLabels": {
+                                    "Visibility": "HIDDEN",
+                                    "Overlap": "DISABLE_OVERLAP"
+                                },
+                                "Tooltip": {
+                                    "TooltipVisibility": "VISIBLE",
+                                    "SelectedTooltipType": "BASIC",
+                                    "FieldBasedTooltip": {
+                                        "AggregationVisibility": "HIDDEN",
+                                        "TooltipTitleType": "PRIMARY_VALUE",
+                                        "TooltipFields": [
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.File Name.2.1686153149223",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.line_of_code.2.1686153165725",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            },
+                                            {
+                                                "FieldTooltipItem": {
+                                                    "FieldId": "82cbe50e-a587-4dab-b59d-3d930673fe30.2.1686153283863",
+                                                    "Visibility": "VISIBLE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "ReferenceLines": [
+                                    {
+                                        "Status": "ENABLED",
+                                        "DataConfiguration": {
+                                            "DynamicConfiguration": {
+                                                "Column": {
+                                                    "DataSetIdentifier": "file_level_info",
+                                                    "ColumnName": "line_of_code"
+                                                },
+                                                "MeasureAggregationFunction": {
+                                                    "NumericalAggregationFunction": {
+                                                        "SimpleNumericalAggregation": "SUM"
+                                                    }
+                                                },
+                                                "Calculation": {
+                                                    "SimpleNumericalAggregation": "AVERAGE"
+                                                }
+                                            }
+                                        },
+                                        "StyleConfiguration": {
+                                            "Pattern": "DASHED"
+                                        },
+                                        "LabelConfiguration": {
+                                            "ValueLabelConfiguration": {
+                                                "RelativePosition": "BEFORE_CUSTOM_LABEL"
+                                            },
+                                            "FontConfiguration": {
+                                                "FontSize": {
+                                                    "Relative": "MEDIUM"
+                                                }
+                                            },
+                                            "HorizontalPosition": "RIGHT",
+                                            "VerticalPosition": "ABOVE"
+                                        }
+                                    }
+                                ]
+                            },
+                            "Actions": [],
+                            "ColumnHierarchies": []
+                        }
+                    },
+                    {
+                        "InsightVisual": {
+                            "VisualId": "73a441dd-00af-4218-ad72-c364571c5ab9",
+                            "Title": {
+                                "Visibility": "HIDDEN",
+                                "FormatText": {
+                                    "PlainText": "Insight"
+                                }
+                            },
+                            "Subtitle": {
+                                "Visibility": "VISIBLE"
+                            },
+                            "InsightConfiguration": {
+                                "Computations": [
+                                    {
+                                        "TopBottomRanked": {
+                                            "ComputationId": "bf5c10f5-0364-4d15-b2cc-849e9f9de20c",
+                                            "Name": "Bottom",
+                                            "Category": {
+                                                "CategoricalDimensionField": {
+                                                    "FieldId": "69341a97-9140-4054-aa6e-b53a31fc3cfe.Feed Type.0.1686308280965",
+                                                    "Column": {
+                                                        "DataSetIdentifier": "file_level_info",
+                                                        "ColumnName": "Feed Type"
+                                                    }
+                                                }
+                                            },
+                                            "ResultSize": 3,
+                                            "Type": "BOTTOM"
+                                        }
+                                    }
+                                ],
+                                "CustomNarrative": {
+                                    "Narrative": "<narrative>\n  <block align=\"center\">\n    <inline font-size=\"22.4px\">\n      <b>Feed Complexity - Based on Code Lines</b>\n    </inline>\n  </block>\n  <br/>\n  <block align=\"center\">\n    (Showing Top \n    <expression>${TopValue}</expression>\n     results)\n  </block>\n</narrative>"
+                                }
+                            },
+                            "Actions": [],
+                            "DataSetIdentifier": "file_level_info"
+                        }
+                    }
+                ],
+                "Layouts": [
+                    {
+                        "Configuration": {
+                            "FreeFormLayout": {
+                                "Elements": [
+                                    {
+                                        "ElementId": "b5382d24-12a4-4b43-9c32-c3466a757ab6",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "144px",
+                                        "Width": "1328px",
+                                        "Height": "272px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "5059aa1f-7555-4a61-9bac-530ec2cd29d8",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "576px",
+                                        "Width": "1328px",
+                                        "Height": "464px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "30775149-ad5c-4cab-8354-a95eaee71c78",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "1168px",
+                                        "Width": "656px",
+                                        "Height": "416px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Color": "#0E0E0EFF"
+                                        }
+                                    },
+                                    {
+                                        "ElementId": "40d466b5-7342-4265-8bb5-a9158f158e78",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "1584px",
+                                        "Width": "656px",
+                                        "Height": "448px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Color": "#0E0E0EFF"
+                                        }
+                                    },
+                                    {
+                                        "ElementId": "2d068bc5-223e-4b6b-91a8-d46c2a8b1f1d",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "672px",
+                                        "YAxisLocation": "1168px",
+                                        "Width": "672px",
+                                        "Height": "416px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Color": "#0E0E0EFF"
+                                        }
+                                    },
+                                    {
+                                        "ElementId": "86b58201-25db-4faf-a63c-4f843a288a72",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "672px",
+                                        "YAxisLocation": "1584px",
+                                        "Width": "672px",
+                                        "Height": "448px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Color": "#0E0E0EFF"
+                                        }
+                                    },
+                                    {
+                                        "ElementId": "f0302e03-2805-4ace-84ae-cd57e53ef5bc",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "16px",
+                                        "Width": "1328px",
+                                        "Height": "112px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "de82e894-b461-4661-95fe-a5089d494629",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "240px",
+                                        "YAxisLocation": "432px",
+                                        "Width": "1104px",
+                                        "Height": "128px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Color": "#0E0E0EFF"
+                                        }
+                                    },
+                                    {
+                                        "ElementId": "73a441dd-00af-4218-ad72-c364571c5ab9",
+                                        "ElementType": "VISUAL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "1056px",
+                                        "Width": "1328px",
+                                        "Height": "112px",
+                                        "Visibility": "VISIBLE"
+                                    },
+                                    {
+                                        "ElementId": "e9004b5f-9c76-4257-94f0-7edc9a46be21",
+                                        "ElementType": "PARAMETER_CONTROL",
+                                        "XAxisLocation": "1168px",
+                                        "YAxisLocation": "1056px",
+                                        "Width": "176px",
+                                        "Height": "112px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Visibility": "HIDDEN"
+                                        },
+                                        "SelectedBorderStyle": {
+                                            "Visibility": "HIDDEN"
+                                        },
+                                        "BackgroundStyle": {
+                                            "Visibility": "HIDDEN"
+                                        }
+                                    },
+                                    {
+                                        "ElementId": "701fbd13-b37f-415a-9ef5-ef222e0f132c",
+                                        "ElementType": "PARAMETER_CONTROL",
+                                        "XAxisLocation": "16px",
+                                        "YAxisLocation": "432px",
+                                        "Width": "224px",
+                                        "Height": "128px",
+                                        "Visibility": "VISIBLE",
+                                        "BorderStyle": {
+                                            "Color": "#0E0E0EFF"
+                                        },
+                                        "SelectedBorderStyle": {
+                                            "Visibility": "VISIBLE"
+                                        },
+                                        "BackgroundStyle": {
+                                            "Visibility": "VISIBLE",
+                                            "Color": "#E4E4E4FF"
+                                        }
+                                    }
+                                ],
+                                "CanvasSizeOptions": {
+                                    "ScreenCanvasSizeOptions": {
+                                        "OptimizedViewPortWidth": "1366px"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SheetControlLayouts": [
+                    {
+                        "Configuration": {
+                            "GridLayout": {
+                                "Elements": []
+                            }
+                        }
+                    }
+                ],
+                "ContentType": "INTERACTIVE"
+            }
+        ],
+        "CalculatedFields": [
+            {
+                "DataSetIdentifier": "file_level_info",
+                "Name": "COMPLEXITY",
+                "Expression": "ifelse(\ncomplexity='easy','SIMPLE',\nifelse(\ncomplexity='easy-medium','SIMPLE-MEDIUM',\nifelse(\ncomplexity='hard','COMPLEX',\nifelse(\ncomplexity='medium-hard','MEDIUM-COMPLEX',\ntoUpper(complexity)\n))))\n\n\n"
+            },
+            {
+                "DataSetIdentifier": "file_level_info",
+                "Name": "pie_s_number",
+                "Expression": "ifelse(\nCOMPLEXITY='SIMPLE',4,\nifelse(\nCOMPLEXITY='SIMPLE-MEDIUM',1,\nifelse(\nCOMPLEXITY='MEDIUM',5,\nifelse(\nCOMPLEXITY='MEDIUM-COMPLEX',2,\nifelse(\nCOMPLEXITY='COMPLEX',3,0)))))"
+            },
+            {
+                "DataSetIdentifier": "file_level_info",
+                "Name": "serial number",
+                "Expression": "ifelse(\nCOMPLEXITY='SIMPLE',1,\nifelse(\nCOMPLEXITY='SIMPLE-MEDIUM',2,\nifelse(\nCOMPLEXITY='MEDIUM',3,\nifelse(\nCOMPLEXITY='MEDIUM-COMPLEX',4,\nifelse(\nCOMPLEXITY='COMPLEX',5,0)))))"
+            },
+            {
+                "DataSetIdentifier": "summary_file",
+                "Name": "Effort  Hours",
+                "Expression": "sum({Easy_1})+sum({Simple-Medium_1})+sum({Medium_1})+sum({Medium-complex_1})+sum({Complex_1})"
+            },
+            {
+                "DataSetIdentifier": "summary_file",
+                "Name": "FEED TYPE",
+                "Expression": "toUpper({Feed Type})"
+            }
+        ],
+        "ParameterDeclarations": [
+            {
+                "IntegerParameterDeclaration": {
+                    "ParameterValueType": "SINGLE_VALUED",
+                    "Name": "TopValue",
+                    "DefaultValues": {
+                        "StaticValues": [
+                            5
+                        ]
+                    },
+                    "ValueWhenUnset": {
+                        "ValueWhenUnsetOption": "RECOMMENDED_VALUE"
+                    }
+                }
+            },
+            {
+                "StringParameterDeclaration": {
+                    "ParameterValueType": "MULTI_VALUED",
+                    "Name": "Complexity",
+                    "DefaultValues": {},
+                    "ValueWhenUnset": {
+                        "ValueWhenUnsetOption": "RECOMMENDED_VALUE"
+                    }
+                }
+            },
+            {
+                "StringParameterDeclaration": {
+                    "ParameterValueType": "MULTI_VALUED",
+                    "Name": "FeedType",
+                    "DefaultValues": {},
+                    "ValueWhenUnset": {
+                        "ValueWhenUnsetOption": "RECOMMENDED_VALUE"
+                    }
+                }
+            },
+            {
+                "StringParameterDeclaration": {
+                    "ParameterValueType": "MULTI_VALUED",
+                    "Name": "FileName",
+                    "DefaultValues": {},
+                    "ValueWhenUnset": {
+                        "ValueWhenUnsetOption": "RECOMMENDED_VALUE"
+                    }
+                }
+            }
+        ],
+        "FilterGroups": [
+            
+            {
+                "FilterGroupId": "6698bec0-209a-4835-9152-4ae86869f6cb",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "cab156dd-b22f-4c66-9917-b32d6f18d941",
+                            "Column": {
+                                "DataSetIdentifier": "summary_file",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "CustomFilterConfiguration": {
+                                    "MatchOperator": "EQUALS",
+                                    "ParameterName": "FeedType",
+                                    "NullOption": "NON_NULLS_ONLY"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "2cd415dc-35e8-424e-a170-99dcee879c48",
+                                "Scope": "ALL_VISUALS"
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "a4658745-1d20-42b2-ad9d-d128ca64fc02",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "ef8df365-e313-4103-b236-c82282b0670c",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "complexity"
+                            },
+                            "Configuration": {
+                                "CustomFilterConfiguration": {
+                                    "MatchOperator": "EQUALS",
+                                    "ParameterName": "Complexity",
+                                    "NullOption": "NON_NULLS_ONLY"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "2cd415dc-35e8-424e-a170-99dcee879c48",
+                                "Scope": "ALL_VISUALS"
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "896cc7bf-5ffc-4f9d-9ff7-6c905fdd8c4a",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "f260f0dd-8bb4-4665-aa7e-ff1875c5cb94",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "CustomFilterConfiguration": {
+                                    "MatchOperator": "EQUALS",
+                                    "ParameterName": "FeedType",
+                                    "NullOption": "NON_NULLS_ONLY"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "2cd415dc-35e8-424e-a170-99dcee879c48",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "5206f833-24b6-46a0-ac85-e42b73f237a3"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "b5dacc51-dadf-4c07-bd84-e739d6eca6dd",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "df7d3b54-d882-4cf9-99e1-9128c7e31902",
+                            "Column": {
+                                "DataSetIdentifier": "summary_file",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "FilterListConfiguration": {
+                                    "MatchOperator": "DOES_NOT_CONTAIN",
+                                    "CategoryValues": [
+                                        ""
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "2cd415dc-35e8-424e-a170-99dcee879c48",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "99ac3bd4-f230-486a-bebb-6aaa0c73960c"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "e537eb6a-dbcf-496c-93e8-0138e0bf506a",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "a0465445-5496-4f96-815f-605ad60262c2",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "FilterListConfiguration": {
+                                    "MatchOperator": "CONTAINS",
+                                    "CategoryValues": [
+                                        "pig"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "5059aa1f-7555-4a61-9bac-530ec2cd29d8"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "DISABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "4c1cca22-f8e1-4fe4-aedf-856f07844069",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "64ce0a6a-7d98-40c2-a617-ee5d168687b1",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "FilterListConfiguration": {
+                                    "MatchOperator": "CONTAINS",
+                                    "CategoryValues": [
+                                        "sh"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "30775149-ad5c-4cab-8354-a95eaee71c78"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "4128dd42-e232-4301-8fa7-0f616a8a4a3b",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "0eb40871-ad10-4c3f-b7b9-e410246cabd0",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "FilterListConfiguration": {
+                                    "MatchOperator": "CONTAINS",
+                                    "CategoryValues": [
+                                        "py"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "40d466b5-7342-4265-8bb5-a9158f158e78"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "84326af1-028a-4697-a9b1-5142ee7c2863",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "2086a5ca-12f3-48ec-9db0-41c961ada181",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "FilterListConfiguration": {
+                                    "MatchOperator": "CONTAINS",
+                                    "CategoryValues": [
+                                        "pig"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "2d068bc5-223e-4b6b-91a8-d46c2a8b1f1d"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "b83d9536-c04f-49f3-bc5f-7c82a8d46f6d",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "c57ec461-283a-4c04-806b-f729177691e6",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "Feed Type"
+                            },
+                            "Configuration": {
+                                "FilterListConfiguration": {
+                                    "MatchOperator": "CONTAINS",
+                                    "CategoryValues": [
+                                        "sql"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "86b58201-25db-4faf-a63c-4f843a288a72"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "604912bb-3770-49d5-bc48-043a9aa73802",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "f61cb42b-b726-4f99-beaa-2696a6ef48bd",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "complexity"
+                            },
+                            "Configuration": {
+                                "CustomFilterConfiguration": {
+                                    "MatchOperator": "EQUALS",
+                                    "ParameterName": "Complexity",
+                                    "NullOption": "NON_NULLS_ONLY"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "f0302e03-2805-4ace-84ae-cd57e53ef5bc"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "5a34416c-6a43-4fc1-8ed7-e11890482866",
+                "Filters": [
+                    {
+                        "TopBottomFilter": {
+                            "FilterId": "1ec87f48-dba1-4126-9b93-5b25426ded9c",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "File Name"
+                            },
+                            "AggregationSortConfigurations": [
+                                {
+                                    "Column": {
+                                        "DataSetIdentifier": "file_level_info",
+                                        "ColumnName": "line_of_code"
+                                    },
+                                    "SortDirection": "DESC",
+                                    "AggregationFunction": {
+                                        "NumericalAggregationFunction": {
+                                            "SimpleNumericalAggregation": "MAX"
+                                        }
+                                    }
+                                }
+                            ],
+                            "ParameterName": "TopValue"
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "86b58201-25db-4faf-a63c-4f843a288a72",
+                                    "2d068bc5-223e-4b6b-91a8-d46c2a8b1f1d",
+                                    "40d466b5-7342-4265-8bb5-a9158f158e78",
+                                    "30775149-ad5c-4cab-8354-a95eaee71c78"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "b0b15837-b29e-4ae4-ae56-e78e19c8892b",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "84162c7d-7e5c-4406-a1fe-e35bb99be57c",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "complexity"
+                            },
+                            "Configuration": {
+                                "CustomFilterConfiguration": {
+                                    "MatchOperator": "EQUALS",
+                                    "ParameterName": "Complexity",
+                                    "NullOption": "NON_NULLS_ONLY"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "de82e894-b461-4661-95fe-a5089d494629"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            },
+            {
+                "FilterGroupId": "6e623d22-044b-40d7-8a32-4105353ba3e1",
+                "Filters": [
+                    {
+                        "CategoryFilter": {
+                            "FilterId": "acf0b4a3-4e34-43a7-84df-a02185a82e85",
+                            "Column": {
+                                "DataSetIdentifier": "file_level_info",
+                                "ColumnName": "File Name"
+                            },
+                            "Configuration": {
+                                "CustomFilterConfiguration": {
+                                    "MatchOperator": "EQUALS",
+                                    "ParameterName": "FileName",
+                                    "NullOption": "NON_NULLS_ONLY"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "ScopeConfiguration": {
+                    "SelectedSheets": {
+                        "SheetVisualScopingConfigurations": [
+                            {
+                                "SheetId": "e7ec595b-db9f-4e07-a8e9-c5b67e436a7b",
+                                "Scope": "SELECTED_VISUALS",
+                                "VisualIds": [
+                                    "5059aa1f-7555-4a61-9bac-530ec2cd29d8"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "Status": "ENABLED",
+                "CrossDataset": "SINGLE_DATASET"
+            }
+        ],
+        "AnalysisDefaults": {
+            "DefaultNewSheetConfiguration": {
+                "InteractiveLayoutConfiguration": {
+                    "Grid": {
+                        "CanvasSizeOptions": {
+                            "ScreenCanvasSizeOptions": {
+                                "ResizeOption": "FIXED",
+                                "OptimizedViewPortWidth": "1600px"
+                            }
+                        }
+                    }
+                },
+                "SheetContentType": "INTERACTIVE"
+            }
+        }
+    }
+}
