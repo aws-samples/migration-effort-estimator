@@ -49,6 +49,24 @@ Run
       ```
       Note: Arguments `input`, `output` and `config` are required; bucket is an optional argument, if mentioned will upload your Excels generated to mentioned S3 bucket.
 
+## Optional QuickSight Setup
+
+You can create a Amazon QuickSight Dashboard using the `analysis_definition.json` file. </br></br>
+       1. Create the datasets from S3 in QuickSight for both Summary file and File level information.</br>
+       2. Edit the `analysis_definition.json` file by replacing variables: </br>
+              - `$AwsAccountId`: Your AWS accountID ,</br>
+              - `$region`: Region where QuickSight Analysis has to be created (like 'us-east-1'),</br>
+              - `$namespace`: Namespace where QuickSight User is present (default is 'default'),</br>
+              - `$username` : Username of QuickSight User which needs permission to the analysis,</br>
+              - `$SummaryDatasetID`: DatasetID of summary file created above,</br>
+              - `$FileLevelInfoDatasetID`: DatasetID of file level information created above. </br></br>
+       3. Create analysis using the below CLI command:</br>
+       ```
+       aws quicksight create-analysis --generate-cli-skeleton > analysis_definition.json
+       ```
+       </br></br>
+       4. Make required changes to analysis based on custom requirements and then publish it as dashboard.</br></br>
+       
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
