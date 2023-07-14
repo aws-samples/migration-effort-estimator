@@ -101,7 +101,7 @@ def write_to_estimator_template(res,output):
         try:
             os.remove('Excels/.DS_Store')
         except Exception as exception:
-            logger.info(exception)
+            logger.info('No hidden files')
         return SummaryPath, filePath
     except Exception as exception:
         logger.error("Exception occured while writing to template")
