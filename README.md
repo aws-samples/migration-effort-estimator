@@ -4,7 +4,7 @@
 
 In migration projects a significant time is spent in analysing and predicting how to accurately estimate the project migration efforts. 
 
-The framework developed helps to simplifying this problem by:
+The  framework developed helps to simplifying this problem by:
 - Understanding Projects Complexities(simple, simple-medium, medium, meedium-complex, complex) - both file level complexities as well as summary level.
 - Map complexitird to efforts required to complete the project.
 
