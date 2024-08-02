@@ -117,10 +117,14 @@ def upload_to_s3(source_bucket, SummaryPath, fileinfoPath):
     message += "##########################################################\n"
     try:
         for FilePath in [SummaryPath, fileinfoPath]:
-            read_file = pd.read_excel (FilePath)
+            if FilePath==SummaryPath:
+                read_file = pd.read_excel (FilePath, skiprows=2)
+                target_key="ESTIMATOR/Output/{}/".format(appname)+FilePath.replace('Excels/','summary_csv/').split('.')[0]+".csv"
+            else:
+                read_file = pd.read_excel (FilePath)
+                target_key="ESTIMATOR/Output/{}/".format(appname)+FilePath.replace('Excels/','script_csv/').split('.')[0]+".csv"
             csv_buffer = StringIO()
-            read_file.to_csv(csv_buffer)
-            target_key="ESTIMATOR/Output/{}/".format(appname)+FilePath.replace('Excels/','').split('.')[0]+".csv"
+            read_file.to_csv(csv_buffer, index=False)
             s3_resource = boto3.resource('s3')
             s3_resource.Object(source_bucket, target_key).put(Body=csv_buffer.getvalue())
             message += "# App Name:- " + str(appname) + "\n"
